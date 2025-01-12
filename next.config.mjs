@@ -2,24 +2,17 @@
 const nextConfig = {
   images: {
     disableStaticImages: false,
-  },
-  webpack: (config) => {
-    config.resolve = {
-      ...config.resolve,
-      fallback: {
-        ...config.resolve.fallback,
-        fs: false,
-      },
-      alias: {
-        ...config.resolve.alias,
-        '@': './src',
-      },
-    }
-    return config
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    remotePatterns: []
   },
   experimental: {
-    esmExternals: 'loose',
-  }
+    esmExternals: 'loose'
+  },
+  output: 'standalone',
+  poweredByHeader: false,
+  reactStrictMode: true,
+  swcMinify: true
 }
 
 export default nextConfig
