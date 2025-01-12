@@ -4,11 +4,18 @@ const nextConfig = {
     disableStaticImages: false,
   },
   webpack: (config) => {
-    config.resolve.fallback = {
-      ...config.resolve.fallback,
-      fs: false,
-    };
-    return config;
+    config.resolve = {
+      ...config.resolve,
+      fallback: {
+        ...config.resolve.fallback,
+        fs: false,
+      },
+      alias: {
+        ...config.resolve.alias,
+        '@': './src',
+      },
+    }
+    return config
   },
   experimental: {
     esmExternals: 'loose',
