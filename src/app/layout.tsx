@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { snatchedFont } from './fonts'
+import { snatchedFont, sportSolidFont } from '@/app/fonts'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`h-full ${snatchedFont.variable}`}>
+    <html lang="en" className={`h-full ${snatchedFont.variable} ${sportSolidFont.variable}`}>
       <body className={`${inter.className} h-full bg-black text-white antialiased`}>
         {children}
       </body>
