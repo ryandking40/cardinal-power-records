@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
-import { useRecordsData } from '../hooks/useRecordsData'
-import { useDisplaySettings } from '../hooks/useDisplaySettings'
-import { DivisionDisplay } from '../components/display/DivisionDisplay'
+import { useRecordsData } from '@/hooks/useRecordsData'
+import { useDisplaySettings } from '@/hooks/useDisplaySettings'
+import { DivisionDisplay } from '@/components/display/DivisionDisplay'
 
 export default function HomePage() {
   const { divisions, loading, error } = useRecordsData()
