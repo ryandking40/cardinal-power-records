@@ -12,6 +12,10 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        snatched: ['var(--font-snatched)'],
+        'sport-solid': ['var(--font-sport-solid)']
+      },
     },
   },
   plugins: [],
