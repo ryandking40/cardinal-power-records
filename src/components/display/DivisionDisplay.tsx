@@ -111,7 +111,11 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete, onNext,
               e.stopPropagation()
               onPrevious()
             }}
-            className="absolute left-0 transition-transform hover:scale-110 focus:scale-110"
+            onTouchEnd={(e) => {
+              e.stopPropagation()
+              onPrevious()
+            }}
+            className="absolute left-0 transition-transform hover:scale-110 focus:scale-110 touch-manipulation"
             aria-label="Previous Division"
           >
             <Image
@@ -128,7 +132,12 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete, onNext,
             animate={{ opacity: isVisible ? 1 : 0 }}
             transition={{ duration: 0.5 }}
             onClick={handleManualToggle}
-            className="font-sport-solid text-xl xs:text-2xl sm:text-5xl md:text-7xl tracking-[0.25em] px-10 xs:px-12 sm:px-20 md:px-24 font-normal underline decoration-2 sm:decoration-4 underline-offset-4 sm:underline-offset-8 text-white hover:text-red-500 transition-colors"
+            onTouchEnd={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              handleManualToggle()
+            }}
+            className="font-sport-solid text-xl xs:text-2xl sm:text-5xl md:text-7xl tracking-[0.25em] px-10 xs:px-12 sm:px-20 md:px-24 font-normal underline decoration-2 sm:decoration-4 underline-offset-4 sm:underline-offset-8 text-white hover:text-red-500 transition-colors touch-manipulation"
             aria-label={isManualMode ? "Enable auto-scroll" : "Enable manual scroll"}
           >
             {formattedDivisionName}
@@ -138,7 +147,11 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete, onNext,
               e.stopPropagation()
               onNext()
             }}
-            className="absolute right-0 transition-transform hover:scale-110 focus:scale-110"
+            onTouchEnd={(e) => {
+              e.stopPropagation()
+              onNext()
+            }}
+            className="absolute right-0 transition-transform hover:scale-110 focus:scale-110 touch-manipulation"
             aria-label="Next Division"
           >
             <Image
