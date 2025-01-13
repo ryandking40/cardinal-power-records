@@ -144,7 +144,7 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete, onNext,
               e.stopPropagation()
               handleManualToggle()
             }}
-            className="font-sport-solid text-xl xs:text-2xl sm:text-5xl md:text-7xl tracking-[0.25em] px-10 xs:px-12 sm:px-20 md:px-24 font-normal underline decoration-2 sm:decoration-4 underline-offset-4 sm:underline-offset-8 text-white active:text-red-500 transition-colors cursor-pointer select-none touch-manipulation"
+            className="font-sport-solid text-base xs:text-xl sm:text-4xl md:text-7xl tracking-[0.25em] px-8 xs:px-12 sm:px-20 md:px-24 font-normal underline decoration-2 sm:decoration-4 underline-offset-4 sm:underline-offset-8 text-white active:text-red-500 transition-colors cursor-pointer select-none touch-manipulation"
             aria-label={isManualMode ? "Enable auto-scroll" : "Enable manual scroll"}
           >
             {formattedDivisionName}
