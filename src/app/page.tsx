@@ -13,14 +13,12 @@ export default function HomePage() {
 
   const handleScrollComplete = useCallback(() => {
     console.log('Scroll complete for division:', divisions[currentDivisionIndex]?.name)
-    // Wait for transition duration before switching to next division
-    setTimeout(() => {
-      const nextIndex = (currentDivisionIndex + 1) % divisions.length
-      console.log('Switching to division:', divisions[nextIndex]?.name)
-      setCurrentDivisionIndex(nextIndex)
-      setIsScrolling(false)
-    }, settings.transition_duration)
-  }, [divisions, currentDivisionIndex, settings.transition_duration])
+    // Switch to next division immediately
+    const nextIndex = (currentDivisionIndex + 1) % divisions.length
+    console.log('Switching to division:', divisions[nextIndex]?.name)
+    setCurrentDivisionIndex(nextIndex)
+    setIsScrolling(false)
+  }, [divisions, currentDivisionIndex])
 
   useEffect(() => {
     if (divisions.length === 0 || isScrolling) return

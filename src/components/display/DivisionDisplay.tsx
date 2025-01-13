@@ -34,8 +34,8 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete }: Divis
     requestAnimationFrame(() => {
       // Calculate the total scrollable height
       const totalHeight = content.scrollHeight - container.clientHeight
-      // Adjust duration based on number of weight classes to ensure consistent timing
-      const baseSpeed = 1500 // milliseconds per 100px for base speed (increased for much slower scrolling)
+      // Adjust duration based on content height
+      const baseSpeed = 1500 // milliseconds per 100px (restored to original slower speed)
       const duration = totalHeight * (baseSpeed / 100)
 
       // Start with content below the screen
@@ -63,8 +63,8 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete }: Divis
         } else {
           // Ensure we've reached the very top before switching
           container.scrollTop = totalHeight
-          // Wait longer before switching to next division
-          setTimeout(onScrollComplete, 100)
+          // Reduced delay before switching
+          setTimeout(onScrollComplete, 50)
         }
       }
 

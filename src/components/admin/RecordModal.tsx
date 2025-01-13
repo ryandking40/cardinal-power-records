@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -28,12 +28,33 @@ export function RecordModal({ isOpen, onClose, onSave, initialData, weightClass 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
-    lift_type: initialData?.lift_type || 'SQUAT',
-    athlete_name: initialData?.athlete_name || '',
-    school: initialData?.school || '',
-    weight_achieved: initialData?.weight_achieved?.toString() || '',
-    year: initialData?.year?.toString() || new Date().getFullYear().toString(),
+    lift_type: 'SQUAT',
+    athlete_name: '',
+    school: '',
+    weight_achieved: '',
+    year: new Date().getFullYear().toString(),
   })
+
+  // Update form data when initialData changes
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        lift_type: initialData.lift_type,
+        athlete_name: initialData.athlete_name,
+        school: initialData.school,
+        weight_achieved: initialData.weight_achieved.toString(),
+        year: initialData.year.toString(),
+      })
+    } else {
+      setFormData({
+        lift_type: 'SQUAT',
+        athlete_name: '',
+        school: '',
+        weight_achieved: '',
+        year: new Date().getFullYear().toString(),
+      })
+    }
+  }, [initialData])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -42,12 +63,15 @@ export function RecordModal({ isOpen, onClose, onSave, initialData, weightClass 
 
     try {
       await onSave({
-        ...formData,
+        lift_type: formData.lift_type as 'SQUAT' | 'BENCH' | 'CLEAN',
+        athlete_name: formData.athlete_name,
+        school: formData.school,
         weight_achieved: Number(formData.weight_achieved),
         year: Number(formData.year),
       })
       onClose()
     } catch (error) {
+      console.error('Error in modal submit:', error)
       setError(error instanceof Error ? error.message : 'Failed to save record')
     } finally {
       setLoading(false)
@@ -69,7 +93,7 @@ export function RecordModal({ isOpen, onClose, onSave, initialData, weightClass 
           <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-black p-6 text-left shadow-xl transition-all border border-white/10">
             <div className="flex items-center justify-between">
               <Dialog.Title className="text-lg font-medium text-white">
-                {initialData ? 'Edit Record' : 'Add New Record'}
+                {initialData ? 'Edit Record' : 'Add Record'}
               </Dialog.Title>
               <button
                 onClick={onClose}
@@ -95,11 +119,11 @@ export function RecordModal({ isOpen, onClose, onSave, initialData, weightClass 
                   value={formData.lift_type}
                   onChange={(e) => setFormData({ ...formData, lift_type: e.target.value as 'SQUAT' | 'BENCH' | 'CLEAN' })}
                   className="mt-1 block w-full rounded-md border-0 bg-white/10 p-2 text-white focus:ring-2 focus:ring-red-600 [&>option]:bg-black"
-                  disabled={!!initialData}
+                  required
                 >
-                  <option value="SQUAT" className="bg-black">Squat</option>
-                  <option value="BENCH" className="bg-black">Bench</option>
-                  <option value="CLEAN" className="bg-black">Clean</option>
+                  <option value="SQUAT">Squat</option>
+                  <option value="BENCH">Bench</option>
+                  <option value="CLEAN">Clean</option>
                 </select>
               </div>
 
@@ -135,7 +159,7 @@ export function RecordModal({ isOpen, onClose, onSave, initialData, weightClass 
                 </label>
                 <input
                   type="number"
-                  step="0.5"
+                  step="5"
                   value={formData.weight_achieved}
                   onChange={(e) => setFormData({ ...formData, weight_achieved: e.target.value })}
                   className="mt-1 block w-full rounded-md border-0 bg-white/10 p-2 text-white focus:ring-2 focus:ring-red-600"
@@ -149,7 +173,9 @@ export function RecordModal({ isOpen, onClose, onSave, initialData, weightClass 
                 </label>
                 <input
                   type="number"
-                  value={formData.year.toString()}
+                  min="1900"
+                  max="2100"
+                  value={formData.year}
                   onChange={(e) => setFormData({ ...formData, year: e.target.value })}
                   className="mt-1 block w-full rounded-md border-0 bg-white/10 p-2 text-white focus:ring-2 focus:ring-red-600"
                   required

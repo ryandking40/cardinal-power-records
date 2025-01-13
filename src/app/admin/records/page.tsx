@@ -105,8 +105,11 @@ export default function RecordsPage() {
         const { error } = await supabase
           .from('records')
           .update({
-            ...record,
-            updated_at: new Date().toISOString(),
+            lift_type: record.lift_type,
+            athlete_name: record.athlete_name,
+            school: record.school,
+            weight_achieved: record.weight_achieved,
+            year: record.year
           })
           .eq('id', editingRecord.id)
 
@@ -132,6 +135,7 @@ export default function RecordsPage() {
 
       if (fetchError) throw fetchError
       setRecords(data)
+      
     } catch (error) {
       console.error('Error saving record:', error)
       throw error
@@ -306,7 +310,13 @@ export default function RecordsPage() {
           setEditingRecord(null)
         }}
         onSave={handleSaveRecord}
-        initialData={editingRecord || undefined}
+        initialData={editingRecord ? {
+          lift_type: editingRecord.lift_type,
+          athlete_name: editingRecord.athlete_name,
+          school: editingRecord.school,
+          weight_achieved: editingRecord.weight_achieved,
+          year: editingRecord.year
+        } : undefined}
         weightClass={weightClasses.find((wc) => wc.id === selectedWeightClass)?.weight.toString() || ''}
       />
     </div>
