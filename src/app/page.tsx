@@ -28,6 +28,18 @@ export default function HomePage() {
     setIsScrolling(true)
   }, [divisions, currentDivisionIndex, isScrolling])
 
+  const handleNext = useCallback(() => {
+    const nextIndex = (currentDivisionIndex + 1) % divisions.length
+    setCurrentDivisionIndex(nextIndex)
+    setIsScrolling(false)
+  }, [divisions.length, currentDivisionIndex])
+
+  const handlePrevious = useCallback(() => {
+    const prevIndex = (currentDivisionIndex - 1 + divisions.length) % divisions.length
+    setCurrentDivisionIndex(prevIndex)
+    setIsScrolling(false)
+  }, [divisions.length, currentDivisionIndex])
+
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -66,6 +78,8 @@ export default function HomePage() {
               division={division}
               isVisible={currentDivisionIndex === index}
               onScrollComplete={handleScrollComplete}
+              onNext={handleNext}
+              onPrevious={handlePrevious}
             />
           </div>
         ))}
