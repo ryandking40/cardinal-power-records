@@ -108,14 +108,16 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete, onNext,
         <div className="relative flex items-center justify-center">
           <button
             onClick={(e) => {
+              e.preventDefault()
               e.stopPropagation()
               onPrevious()
             }}
-            onTouchEnd={(e) => {
+            onTouchStart={(e) => {
+              e.preventDefault()
               e.stopPropagation()
               onPrevious()
             }}
-            className="absolute left-0 transition-transform hover:scale-110 focus:scale-110 touch-manipulation"
+            className="absolute left-0 transition-transform active:scale-110 cursor-pointer select-none touch-manipulation p-2"
             aria-label="Previous Division"
           >
             <Image
@@ -123,35 +125,42 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete, onNext,
               alt="Previous Division"
               width={80}
               height={80}
-              className="h-8 xs:h-10 sm:h-16 md:h-20 w-auto"
+              className="h-8 xs:h-10 sm:h-16 md:h-20 w-auto pointer-events-none"
               priority
+              draggable={false}
             />
           </button>
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: isVisible ? 1 : 0 }}
             transition={{ duration: 0.5 }}
-            onClick={handleManualToggle}
-            onTouchEnd={(e) => {
+            onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
               handleManualToggle()
             }}
-            className="font-sport-solid text-xl xs:text-2xl sm:text-5xl md:text-7xl tracking-[0.25em] px-10 xs:px-12 sm:px-20 md:px-24 font-normal underline decoration-2 sm:decoration-4 underline-offset-4 sm:underline-offset-8 text-white hover:text-red-500 transition-colors touch-manipulation"
+            onTouchStart={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              handleManualToggle()
+            }}
+            className="font-sport-solid text-xl xs:text-2xl sm:text-5xl md:text-7xl tracking-[0.25em] px-10 xs:px-12 sm:px-20 md:px-24 font-normal underline decoration-2 sm:decoration-4 underline-offset-4 sm:underline-offset-8 text-white active:text-red-500 transition-colors cursor-pointer select-none touch-manipulation"
             aria-label={isManualMode ? "Enable auto-scroll" : "Enable manual scroll"}
           >
             {formattedDivisionName}
           </motion.button>
           <button
             onClick={(e) => {
+              e.preventDefault()
               e.stopPropagation()
               onNext()
             }}
-            onTouchEnd={(e) => {
+            onTouchStart={(e) => {
+              e.preventDefault()
               e.stopPropagation()
               onNext()
             }}
-            className="absolute right-0 transition-transform hover:scale-110 focus:scale-110 touch-manipulation"
+            className="absolute right-0 transition-transform active:scale-110 cursor-pointer select-none touch-manipulation p-2"
             aria-label="Next Division"
           >
             <Image
@@ -159,8 +168,9 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete, onNext,
               alt="Next Division"
               width={80}
               height={80}
-              className="h-8 xs:h-10 sm:h-16 md:h-20 w-auto -scale-x-100"
+              className="h-8 xs:h-10 sm:h-16 md:h-20 w-auto -scale-x-100 pointer-events-none"
               priority
+              draggable={false}
             />
           </button>
         </div>
