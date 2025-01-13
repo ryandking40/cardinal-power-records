@@ -96,14 +96,14 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete }: Divis
             alt="Cardinal Logo"
             width={80}
             height={80}
-            className="absolute left-0 h-20 w-auto"
+            className="absolute left-0 h-12 sm:h-16 md:h-20 w-auto"
             priority
           />
           <motion.h2
             initial={{ opacity: 0 }}
             animate={{ opacity: isVisible ? 1 : 0 }}
             transition={{ duration: 0.5 }}
-            className="font-sport-solid text-7xl tracking-[0.25em] px-24 font-normal underline decoration-4 underline-offset-8 text-white"
+            className="font-sport-solid text-3xl sm:text-5xl md:text-7xl tracking-[0.25em] px-16 sm:px-20 md:px-24 font-normal underline decoration-4 underline-offset-8 text-white"
           >
             {formattedDivisionName}
           </motion.h2>
@@ -112,7 +112,7 @@ export function DivisionDisplay({ division, isVisible, onScrollComplete }: Divis
             alt="Cardinal Logo"
             width={80}
             height={80}
-            className="absolute right-0 h-20 w-auto -scale-x-100"
+            className="absolute right-0 h-12 sm:h-16 md:h-20 w-auto -scale-x-100"
             priority
           />
         </div>
