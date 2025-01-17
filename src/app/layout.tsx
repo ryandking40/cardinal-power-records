@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`h-full ${snatchedFont.variable} ${sportSolidFont.variable}`}>
-      <body className={`${inter.className} h-full bg-black text-white antialiased`}>
+    <html lang="en" className={`h-full min-h-screen ${snatchedFont.variable} ${sportSolidFont.variable}`}>
+      <body className={`${inter.className} min-h-screen w-full bg-black text-white antialiased`}>
         {children}
       </body>
     </html>
