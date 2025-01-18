@@ -26,8 +26,13 @@ export default function AdminLayout({
   }, [router, supabase])
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut()
-    router.push('/admin/login')
+    try {
+      await supabase.auth.signOut()
+      router.push('/admin/login')
+      router.refresh()
+    } catch (error) {
+      console.error('Error signing out:', error)
+    }
   }
 
   return (
