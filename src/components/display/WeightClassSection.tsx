@@ -49,10 +49,13 @@ export function WeightClassSection({ weightClass }: WeightClassSectionProps) {
   const groupedCleans = groupRecordsByWeight(cleanRecords)
 
   return (
-    <div className="space-y-6">
-      <h3 className="text-center font-sports text-4xl text-white">
-        {weightClass.weight === 'PWR' ? 'PWR' : `${weightClass.weight} LBS`}
-      </h3>
+    <div className="space-y-3">
+      <div className="pb-1">
+        <h3 className="text-center font-sports text-4xl text-white">
+          {weightClass.weight === 'PWR' ? 'PWR' : `${weightClass.weight} LBS`}
+        </h3>
+        <div className="mx-auto mt-2 h-px w-full bg-white/20" />
+      </div>
       <div className="grid grid-cols-3 gap-4">
         <div className="space-y-2">
           <h4 className="text-center font-sports text-lg text-gray-400">SQUAT</h4>
