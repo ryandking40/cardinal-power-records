@@ -47,6 +47,11 @@ export default function LoginPage() {
                 colors: {
                   brand: '#dc2626',
                   brandAccent: '#ef4444',
+                  inputText: 'white',
+                  inputBackground: 'rgb(255 255 255 / 0.1)',
+                  inputBorder: 'transparent',
+                  inputLabelText: 'rgb(209 213 219)',
+                  inputPlaceholder: 'rgb(156 163 175)'
                 }
               }
             }
